@@ -168,36 +168,63 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
       /** Returns true if this linked list contains the element e, otherwise returns false
      * @return .*/
     public boolean contains(E e){
+        Node <E> temp = head;
          for (int i = 0; i < size; i++){
-      if (e.equals(size)) return true;
-         }
-    return false;
+      if (temp.element.equals(e)) 
+          return true;
+      temp = temp.next;
+        }
+        return false;
     }
 
   /** Returns the element at specified index of this list, returns null if index is invalid. */
-     public E get(int index) {    
+     public E get(int index) {
+         if(index < 0 || index > size -1)
          return null;
-    }
+    
+         Node <E> temp = head;
+           for (int i = 0; i < index; i++) {
+            temp = temp.next;
+           }
+           return temp.element;
+      }
+     
 
   /** Returns the index of the first matching element in this linked list, return ¬-1 if no match. */
     public int indexOf(E e) {
-        for (int i = 0; i < size; i++) {           
-        }
-        return -1;
-     }
-
-  /** Returns the index of the last matching element in this list, returns ¬-1 if no match. */
-     public int lastIndexOf(E e) {
-         for (int i = size -1; i < 0; i--) {
-             if (e.equals(size)) return i; 
+            Node <E> temp = head;
+         for (int i = 0; i < size; i++) {
+             if (temp.element.equals(e)) return i; 
+             temp = temp.next;
          }
          return -1;
      }
 
+  /** Returns the index of the last matching element in this list, returns ¬-1 if no match. */
+     public int lastIndexOf(E e) {
+         Node <E> temp = head;
+         int last = -1;
+         for (int i = 0; i < size; i++) {
+             if (temp.element.equals(e)) 
+                 last = i; 
+             temp = temp.next;
+         }
+         return last;
+     }
+
   /** Replaces the element at specified index in this linked list with the specified element.  Returns the old element at specified index, otherwise returns null if index is invalid. */
     public E set(int index, E e) {
-         size = index;
-         return e;
+        if(index < 0 || index > size -1)
+            return null;
+        
+        Node <E> temp = head;
+        for (int i = 0; i < index; i++) 
+        temp = temp.next;    
+        
+        E to = temp.element;
+        temp.element = e;
+       
+         return to;
      }
 
     
